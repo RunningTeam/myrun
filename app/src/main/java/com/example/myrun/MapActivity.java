@@ -4,7 +4,6 @@ import android.Manifest;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity{
 
-    Toolbar toolbar;
 
     ArrayList<Long> latList = new ArrayList<Long>();
     ArrayList<Long> lonList = new ArrayList<Long>();

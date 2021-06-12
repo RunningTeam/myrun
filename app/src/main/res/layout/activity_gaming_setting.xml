@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<LinearLayout android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.myrun"
+            app:popupTheme="@style/Theme.myrun">
 
-    <TextView
-        android:layout_height="10dp"
-        android:layout_width="match_parent"
-        android:background="#A9F5F2"/>
-
-    <TextView
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        android:background="#A9F5F2"
-        android:textSize="20dp"
-        android:textColor="#000000"
-        android:text=" Uncle Taco"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="MyRun"
+                android:textSize="30dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/text"
+                android:textStyle="bold">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
     <TextView
         android:layout_height="40dp"

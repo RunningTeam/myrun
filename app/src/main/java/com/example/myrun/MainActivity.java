@@ -18,13 +18,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.myrun.databinding.ActivityMainBinding;
 import com.example.myrun.model.Auth;
 import com.example.myrun.model.Firestore;
+import com.example.myrun.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.example.myrun.model.User;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {

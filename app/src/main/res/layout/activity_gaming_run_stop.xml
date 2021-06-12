@@ -9,18 +9,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_height="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:background="#A9F5F2"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.myrun"
+            app:popupTheme="@style/Theme.myrun">
 
-    <TextView
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        android:background="#A9F5F2"
-        android:textSize="20dp"
-        android:textColor="#000000"
-        android:text=" Running"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="MyRun"
+                android:textSize="30dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/text"
+                android:textStyle="bold">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
     <ImageView
         android:layout_height="400dp"
