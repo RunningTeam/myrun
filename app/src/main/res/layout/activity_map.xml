@@ -41,37 +41,4 @@
         android:name="com.naver.maps.map.MapFragment">
     </fragment>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 위치 공유"
-            android:layout_marginLeft="13dp"
-            android:id="@+id/sharelocation">
-        </Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="친구 위치 로드"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/loadFriend">
-        </Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="친구 위치 표시"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/appearFriend">
-        </Button>
-
-    </LinearLayout>
-
-
-
 </LinearLayout>
