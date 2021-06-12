@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_fill"
-        android:text="MyRun"
+        android:text="MyRuN"
         android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/text"
