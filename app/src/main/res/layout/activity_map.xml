@@ -5,38 +5,40 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MapActivity"
+
     android:orientation="vertical">
 
-    <!--상단 툴바-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/Theme.myrun"
-            android:backgroundTint="@color/text"
-            app:popupTheme="@style/Theme.myrun"
-            >
+            app:popupTheme="@style/Theme.myrun">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="MyRun"
                 android:textSize="30dp"
-                android:textColor="@color/black"
-                android:layout_marginRight="70dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/text"
                 android:textStyle="bold">
             </TextView>
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
 
-
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/map"
+        android:name="com.naver.maps.map.MapFragment">
+    </fragment>
 
     <LinearLayout
         android:layout_width="match_parent"
