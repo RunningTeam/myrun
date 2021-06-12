@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MapActivity"
+    android:orientation="vertical">
+
+    <!--상단 툴바-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.myrun"
+            android:backgroundTint="@color/text"
+            app:popupTheme="@style/Theme.myrun"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="MyRun"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="70dp"
+                android:textStyle="bold">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 위치 공유"
+            android:layout_marginLeft="13dp"
+            android:id="@+id/sharelocation">
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구 위치 로드"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/loadFriend">
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구 위치 표시"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/appearFriend">
+        </Button>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

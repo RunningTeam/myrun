@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/mainColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:background="@drawable/edit_round"
+            android:inputType="textEmailAddress"
+            android:hint="ID"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="200dp"/>
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_round"
+            android:inputType="textPassword"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:hint="Password"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"/>
+
+        <EditText
+            android:id="@+id/passwordCheckEditText"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_round"
+            android:inputType="textPassword"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:hint="Cheak Password"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"/>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="109dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Sign up"
+                android:backgroundTint="@color/text"/>
+
+            <Button
+                android:id="@+id/gotoLoginButton"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:text="Sign in"
+                android:backgroundTint="@color/text"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

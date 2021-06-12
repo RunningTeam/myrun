@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout
+    android:orientation="vertical"
+    tools:context=".LoginActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_height="10dp"
+        android:layout_width="match_parent"
+        android:background="#A9F5F2"/>
+
+    <TextView
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:background="#A9F5F2"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:text=" Running"/>
+
+    <ImageView
+        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:src="@drawable/path"/>
+
+
+    <TableLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:stretchColumns="*">
+
+
+        <TableRow android:background="#000000">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="Distance\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="TIme\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="Kcal\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="10.25Km"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="00:54:16"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="451Kcal"
+                android:gravity="center"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="RESTART"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:backgroundTint="#ECCEF5"
+        android:layout_gravity="center"
+        android:id="@+id/btnRestart"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="COMPLETE"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:backgroundTint="#ECCEF5"
+        android:layout_gravity="center"
+        android:id="@+id/btnComplete"/>
+
+</LinearLayout>
