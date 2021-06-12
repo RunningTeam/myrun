@@ -20,6 +20,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/Theme.myrun"
+                android:backgroundTint="@color/text"
                 app:popupTheme="@style/Theme.myrun">
 
                 <TextView
