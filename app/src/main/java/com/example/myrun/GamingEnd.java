@@ -117,7 +117,7 @@ public class GamingEnd extends AppCompatActivity {
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 stream.close();
                 bmp.recycle();
-                Intent in1 = new Intent(this, HistoryMainActivity.class);
+                Intent in1 = new Intent(this, MainActivity.class);
                 in1.putExtra("image", filename);
                 startActivity(in1);
             }catch(Exception e){
