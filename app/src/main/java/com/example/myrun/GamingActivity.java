@@ -153,6 +153,7 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
             public void onClick(View v) {
                 timer.cancel();
                 Intent intent = new Intent(GamingActivity.this, GamingEnd.class);
+                intent.putExtra("key", 1);
                 intent.putExtra("km",km.getText().toString());
                 intent.putExtra("time",time.getText().toString());
                 intent.putExtra("kc",kc.getText().toString());
