@@ -26,12 +26,15 @@ import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     Toolbar toolbar;
     PathOverlay path = new PathOverlay();
-    ArrayList<LatLng> locationList = new ArrayList<LatLng>();
+    ArrayList<LatLng> locationList = new ArrayList<>();
 
 
     private static final String TAG = "MapActivity";
@@ -44,7 +47,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private FusedLocationSource mLocationSource;
     private static NaverMap mNaverMap;
-    //private static NaverMap tempNaverMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
 
-
-
         // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
@@ -89,18 +89,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double lat = mLocationSource.getLastLocation().getLatitude();
-                double lon = mLocationSource.getLastLocation().getLongitude();
-                locationList.add(new LatLng(lat,lon));
-                if (locationList.size() > 2) {
-                    path.setCoords(locationList);
-                    startToast("1차성공 " + Integer.toString(locationList.size()));
+                if (mLocationSource.getLastLocation()==null) {
+                    startToast("아직 위치를 찾지 못하였습니다.");
                 } else {
-                    startToast("1차실패 " + Integer.toString(locationList.size()));
+                    double lat = mLocationSource.getLastLocation().getLatitude();
+                    double lon = mLocationSource.getLastLocation().getLongitude();
+                    locationList.add(new LatLng(lat,lon));
+                    if (locationList.size() > 2) {
+                        path.setCoords(locationList);
+                        //startToast("1차성공 " + Integer.toString(locationList.size()));
+                    } else {
+                        //startToast("1차실패 " + Integer.toString(locationList.size()));
+                    }
+                    finalMapFragment.getMapAsync(MapActivity.this);
                 }
-                finalMapFragment.getMapAsync(MapActivity.this);
             }
         });
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                MapActivity.this.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        btnstart.performClick();
+                    }
+                });
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 5000, 1000);
     }
 
     @Override
@@ -113,9 +131,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (locationList.size() > 2) {
             path.setColor(Color.GREEN);
             path.setMap(mNaverMap);
-            startToast("2차 성공 " + Integer.toString(locationList.size()));
-        } else {
-            startToast("2차 실패 " + Integer.toString(locationList.size()));
         }
         mNaverMap.setLocationSource(mLocationSource);
         mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
@@ -136,7 +151,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
     }
-
     private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
