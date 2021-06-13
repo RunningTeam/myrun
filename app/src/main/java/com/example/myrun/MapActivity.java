@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     PathOverlay path = new PathOverlay();
     ArrayList<LatLng> locationList = new ArrayList<>();
 
+    double totald;
 
     private static final String TAG = "MapActivity";
 
@@ -84,24 +86,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
+        TextView km = findViewById(R.id.km);
+        TextView time = findViewById(R.id.Ntime);
+        TextView kc = findViewById(R.id.Kc);
+
+
+        final long startTime = System.currentTimeMillis();
+
         Button btnstart = findViewById(R.id.btnNormalstart);
         MapFragment finalMapFragment = mapFragment;
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mLocationSource.getLastLocation()==null) {
-                    startToast("아직 위치를 찾지 못하였습니다.");
+
                 } else {
                     double lat = mLocationSource.getLastLocation().getLatitude();
                     double lon = mLocationSource.getLastLocation().getLongitude();
                     locationList.add(new LatLng(lat,lon));
                     if (locationList.size() > 2) {
+                        double lat1 = locationList.get(locationList.size()-2).latitude;
+                        double lon1 = locationList.get(locationList.size()-2).longitude;
+                        totald = totald + Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2));
+                        long endTime = System.currentTimeMillis();
+                        time.setText(Long.toString((endTime - startTime)/1000) + " second");
+                        km.setText(Double.toString(totald)+" km");
+                        kc.setText(Integer.toString((int) (totald*60))+ " Kcal");
                         path.setCoords(locationList);
-                        //startToast("1차성공 " + Integer.toString(locationList.size()));
-                    } else {
-                        //startToast("1차실패 " + Integer.toString(locationList.size()));
+                        finalMapFragment.getMapAsync(MapActivity.this);
                     }
-                    finalMapFragment.getMapAsync(MapActivity.this);
                 }
             }
         });
