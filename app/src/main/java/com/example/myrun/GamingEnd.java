@@ -50,11 +50,14 @@ public class GamingEnd extends AppCompatActivity {
 
     Toolbar toolbar;
     private Bitmap bmp;
+    int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming_end);
+
+
 
         Intent receiveIntent = getIntent();
         TextView runResult = findViewById(R.id.runResult);
@@ -67,6 +70,7 @@ public class GamingEnd extends AppCompatActivity {
                     receiveIntent.getStringExtra("km"),
                     receiveIntent.getStringExtra("kc"));
             runResult.setText(result);
+            i = receiveIntent.getIntExtra("key",0);
         }
 
         toolbar = findViewById(R.id.toolbar_map);
@@ -122,6 +126,7 @@ public class GamingEnd extends AppCompatActivity {
                 in1.putExtra("time" , receiveIntent.getStringExtra("time"));
                 in1.putExtra("km" , receiveIntent.getStringExtra("km"));
                 in1.putExtra("kc" , receiveIntent.getStringExtra("kc"));
+                in1.putExtra("key",i);
                 startActivity(in1);
                 finish();
             }catch(Exception e){
