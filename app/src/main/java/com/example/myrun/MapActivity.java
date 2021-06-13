@@ -131,6 +131,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                timer.cancel();
                 Intent intent = new Intent(MapActivity.this, GamingEnd.class);
                 intent.putExtra("km",km.getText().toString());
                 intent.putExtra("time",time.getText().toString());
