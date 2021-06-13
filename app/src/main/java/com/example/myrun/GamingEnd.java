@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -67,18 +66,9 @@ public class GamingEnd extends AppCompatActivity {
         btnCamera = findViewById(R.id.btnCapture);
         btnSave = findViewById(R.id.btnSave);
 
-        Button btnInitial = findViewById(R.id.btnInitial);
-        Button btnShare = findViewById(R.id.btnShare);
+
         Button btnGotomain = findViewById(R.id.btnGotomain);
 
-        btnInitial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         btnGotomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
