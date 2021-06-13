@@ -2,8 +2,8 @@ package com.example.myrun;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
+    // 전역변수 선언
+    // Firebase 유저 정보와 로그 Tag
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
 
@@ -26,43 +28,30 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        //Initialize Firebase Auth
+        // 유저정보 초기화
         mAuth = FirebaseAuth.getInstance();
-        findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gotoLoginButton).setOnClickListener(onClickListener);
+
+        // 회원가입 버튼
+        Button signUpbtn = findViewById(R.id.signUpButton);
+        signUpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp();
+            }
+        });
+
+        // 로그인 버튼
+        Button gotoLoginbtn = findViewById(R.id.gotoLoginButton);
+        gotoLoginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startLoginActivity();
+            }
+        });
     }
 
-/*    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-    }*/
-
-   /* @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        moveTaskToBack(true);
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
-    }*/
-
-    View.OnClickListener onClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            switch (v.getId()){
-                case R.id.signUpButton:
-                    signUp();
-                    break;
-
-                case R.id.gotoLoginButton:
-                    startLoginActivity();
-                    break;
-            }
-        }
-    };
-
     private void signUp(){
+        // 이메일과 패스워드, 닉네임 받아오기
         EditText e_text = (EditText)findViewById(R.id.emailEditText);
         EditText p_text = (EditText)findViewById(R.id.passwordEditText);
         EditText p_ch_text = (EditText)findViewById(R.id.passwordCheckEditText);
@@ -79,15 +68,13 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
+                                    // 유저정보 생성 성공
                                     // DB 생성 작업
                                     createNewUserDatabase(task.getResult().getUser());
                                 } else {
-                                    // If sign in fails, display a message to the user.
+                                    // 유저정보 생성 실패
                                     if (task.getException() != null) {
-                                        startToast(task.getException().toString());
-                                        Log.d(TAG, "파이어베이스 연동 실패: "+task.getException().toString());
+                                        startToast("파이어베이스 연동 실패");
                                     }
                                 }
                             }
@@ -100,33 +87,32 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 새로운 사용자의 DB 정보를 생성한다
-     * @author Taehyun Park
-     */
+    // firebase DB에 새 유저정보 작성
     private void createNewUserDatabase(FirebaseUser user) {
         // 새 유저 정보 작성
         Firestore.writeNewUser(user.getUid(), user.getEmail(), user.getEmail())
                 .addOnCompleteListener(documentTask -> {
                     // 성공했다면
                     if(documentTask.isSuccessful()) {
-                        startToast("회원가입에 성공하였습니다.");
+                        startToast("회원가입 성공");
                     }
                     // 실패했다면
                     else {
                         // 에러 메시지 띄우고 로그아웃
-                        Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_LONG).show();
                         mAuth.signOut();
                     }
                 });
     }
-
+    // 메세지 함수
     private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+    // 로그인 액티비티 실행
     private void startLoginActivity(){
         Intent intent = new Intent (this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }
 
