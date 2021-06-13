@@ -53,6 +53,16 @@
         <activity android:name=".HistoryMainActivity" />
         <activity android:name=".HistoryRunning1__" />
 
+        <provider
+            android:authorities="${applicationId}.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path"/>
+        </provider>
+
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" /> <!-- firebase -cloud messaging for push alarm -->
