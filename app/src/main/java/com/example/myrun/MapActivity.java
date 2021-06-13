@@ -34,7 +34,10 @@ import static java.lang.Math.round;
 
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+    /*
+    전역변수 선언
+    툴바, 지도 객체와 요소들, 권한코드
+     */
     Toolbar toolbar;
     PathOverlay path = new PathOverlay();
     ArrayList<LatLng> locationList = new ArrayList<>();
@@ -57,12 +60,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        toolbar = findViewById(R.id.toolbar_map);
         //상단 툴바 설정
+        toolbar = findViewById(R.id.toolbar_map);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowCustomEnabled(true); // 커스터마이징 하기 위해 필요
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55e6c3"))); // 툴바 배경색
-
 
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource =
@@ -80,22 +82,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
+        // 거리 시간 칼로리 연결
         TextView km = findViewById(R.id.km);
         TextView time = findViewById(R.id.Ntime);
         TextView kc = findViewById(R.id.Kc);
 
-
+        // 러닝 시작 시간
         final long startTime = System.currentTimeMillis();
 
+        // 동기화 버튼 ( 스케줄링으로 자동 클릭 )
         Button btnstart = findViewById(R.id.btnNormalstart);
+
+        // 로컬을 위한 MapFragment 선언
         MapFragment finalMapFragment = mapFragment;
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mLocationSource.getLastLocation()==null) {
-
+                    // 현재 위치가 잡히지 않으면 pass
                 } else {
-                    double lat = mLocationSource.getLastLocation().getLatitude();
+                    // 현재 위치가 잡힐 경우
+                    double lat = mLocationSource.getLastLocation().getLatitude(); // 위도
                     double lon = mLocationSource.getLastLocation().getLongitude();
                     locationList.add(new LatLng(lat,lon));
                     if (locationList.size() > 2) {
