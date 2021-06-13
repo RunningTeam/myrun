@@ -118,14 +118,10 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
                         Double tempkm = (round(totald*100000)/1000.0) / ((endTime - startTime)/1000);
                         long tempTime = endTime - startTime;
                         tempTime = tempTime/1000;
-                        String t = "tempkm : " + Double.toString(tempkm) + "dis : " +
-                                Double.toString(Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2))) +
-                                "tempTime : " + Long.toString(tempTime);
-                        Toast.makeText(getApplicationContext(),t,Toast.LENGTH_SHORT).show();
-                        /*if (Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)) < tempkm && tempTime > 20) {
+                        if (round(Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2))*100000)/1000.0 < tempkm && tempTime > 20) {
                             mPool.play(mDdok,1,1,0,1,1);
                             Toast.makeText(getApplicationContext(),"문어아빠가 다가옵니다!",Toast.LENGTH_SHORT).show();
-                        }*/
+                        }
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(GamingActivity.this);
                     }
