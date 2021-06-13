@@ -173,6 +173,7 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
         if (locationList.size() > 2) {
             try {
                 markers.get(0).setMap(null);
+                markers.clear();
             } catch (Exception e) {
 
             }
