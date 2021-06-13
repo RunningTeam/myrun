@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     Toolbar toolbar;
     TextView tv_name;
     private static final String TAG = "MainActivity";
+    public static Bitmap image_btn_click_tmp;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -148,10 +149,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         // 일반 런닝모드와 게임 모드에서 찍은 사진을 bmp로 저장 후 덮어쓰기
         Intent receiveIntent = getIntent();
         int i = receiveIntent.getIntExtra("key",0);
+
+
         if (i == 0){
             image_btn1_click.setImageBitmap(bmp);
+            image_btn_click_tmp = bmp;
         }
         else if(i == 1){
+            image_btn1_click.setImageBitmap(image_btn_click_tmp);
             image_btn2_click.setImageBitmap(bmp);
         }
 
