@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +17,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
+
+import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     Toolbar toolbar;
+    PathOverlay path = new PathOverlay();
+    ArrayList<LatLng> locationList = new ArrayList<LatLng>();
+
 
     private static final String TAG = "MapActivity";
 
@@ -36,6 +44,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private FusedLocationSource mLocationSource;
     private static NaverMap mNaverMap;
+    //private static NaverMap tempNaverMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowCustomEnabled(true); // 커스터마이징 하기 위해 필요
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55e6c3"))); // 툴바 배경색
+
+        Button btnstop = findViewById(R.id.btnNormalStop);
+        btnstop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, MapStopActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource =
@@ -60,16 +78,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
 
+
+
         // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
-        Button btnstop = findViewById(R.id.btnNormalStop);
-        btnstop.setOnClickListener(new View.OnClickListener() {
+        Button btnstart = findViewById(R.id.btnNormalstart);
+        MapFragment finalMapFragment = mapFragment;
+        btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, MapStopActivity.class);
-                startActivity(intent);
+                    double lat = mLocationSource.getLastLocation().getLatitude();
+                    double lon = mLocationSource.getLastLocation().getLongitude();
+                    locationList.add(new LatLng(lat,lon));
+                    path.setCoords(locationList);
+                    finalMapFragment.getMapAsync(MapActivity.this);
             }
         });
     }
@@ -80,6 +104,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
+        mNaverMap.setMapType(NaverMap.MapType.Basic);
+        path.setMap(mNaverMap);
         mNaverMap.setLocationSource(mLocationSource);
         mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
@@ -98,4 +124,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
     }
+
+    private void startToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
 }
