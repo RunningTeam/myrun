@@ -38,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapStopActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MapActivity" />
@@ -47,12 +46,7 @@
         <activity android:name=".ProfileEditActivity" />
         <activity android:name=".GamingActivity" />
         <activity android:name=".GamingEnd" />
-        <activity android:name=".GamingRunActivity" />
-        <activity android:name=".GamingRunStopActivity" />
-        <activity android:name=".GamingSettingActivity" />
-        <activity android:name=".HistoryMainActivity" />
         <activity android:name=".HistoryRunning1__" />
-
         <provider
             android:authorities="${applicationId}.fileprovider"
             android:name="androidx.core.content.FileProvider"
