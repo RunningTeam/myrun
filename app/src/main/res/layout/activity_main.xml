@@ -65,19 +65,19 @@
 
                         <TextView
                             android:layout_gravity="center"
-                            android:text="2일 23:14:00"
+                            android:text="00:00:00"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
                         <TextView
                             android:layout_gravity="center"
-                            android:text="60km"
+                            android:text="0 km"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
                         <TextView
                             android:layout_gravity="center"
-                            android:text="26753kcal"
+                            android:text="0 kcal"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
                     </TableRow>
@@ -114,7 +114,7 @@
                             android:id="@+id/image_btn1_click"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
-                            android:src="@drawable/running1" />
+                            android:src="" />
 
                     </LinearLayout>
 
