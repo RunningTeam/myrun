@@ -22,7 +22,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapStopActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     Toolbar toolbar;
 
@@ -64,12 +64,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
-        Button btnstop = findViewById(R.id.btnStop);
-        btnstop.setOnClickListener(new View.OnClickListener() {
+        Button btnrestart = findViewById(R.id.btnRestart);
+        btnrestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, MapStopActivity.class);
+                Intent intent = new Intent(MapStopActivity.this, MapActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        Button btncomplete = findViewById(R.id.btnComplete);
+        btncomplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
