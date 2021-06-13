@@ -20,11 +20,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import com.example.myrun.model.Auth;
+import com.example.myrun.model.Firestore;
+import com.example.myrun.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,6 +55,8 @@ public class GamingEnd extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    static String name;
+
     private Bitmap bmp;
 
     @Override
@@ -54,10 +64,25 @@ public class GamingEnd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming_end);
 
+
+
+        Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                User user = task.getResult().toObject(User.class);
+                if(user != null){
+                    name = user.getUserNickName();
+                }else {
+                    // failed.
+                    Log.d("MainActivity.this", "user object is NULL.");
+                }
+            }
+        });
+
         Intent receiveIntent = getIntent();
         TextView runResult = findViewById(R.id.runResult);
         if (receiveIntent != null) {
-            String result = String.format("User: \n\nTime: %s\n\nDistance: %s\n\nKcal: %s",
+            String result = String.format("User: %s\n\nTime: %s\n\nDistance: %s\n\nKcal: %s", name,
                     receiveIntent.getStringExtra("time"),
                     receiveIntent.getStringExtra("km"),
                     receiveIntent.getStringExtra("kc"));
