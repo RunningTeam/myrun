@@ -44,7 +44,7 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
     ArrayList<LatLng> locationList = new ArrayList<>();
     SoundPool mPool;
     int mDdok;
-    AudioManager mAm;
+    ArrayList<Marker> markers = new ArrayList<>();
 
     double totald;
 
@@ -118,10 +118,14 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
                         Double tempkm = (round(totald*100000)/1000.0) / ((endTime - startTime)/1000);
                         long tempTime = endTime - startTime;
                         tempTime = tempTime/1000;
-                        if (Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)) < tempkm && tempTime > 20) {
+                        String t = "tempkm : " + Double.toString(tempkm) + "dis : " +
+                                Double.toString(Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2))) +
+                                "tempTime : " + Long.toString(tempTime);
+                        Toast.makeText(getApplicationContext(),t,Toast.LENGTH_SHORT).show();
+                        /*if (Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)) < tempkm && tempTime > 20) {
                             mPool.play(mDdok,1,1,0,1,1);
                             Toast.makeText(getApplicationContext(),"문어아빠가 다가옵니다!",Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(GamingActivity.this);
                     }
@@ -166,9 +170,15 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
         mNaverMap = naverMap;
         mNaverMap.setMapType(NaverMap.MapType.Basic);
         if (locationList.size() > 2) {
+            try {
+                markers.get(0).setMap(null);
+            } catch (Exception e) {
+
+            }
             path.setColor(Color.GREEN);
             path.setMap(mNaverMap);
             Marker marker = new Marker();
+            markers.add(marker);
             marker.setIcon(MarkerIcons.BLACK);
             marker.setIconTintColor(Color.RED);
             marker.setPosition(locationList.get(locationList.size()-2));
