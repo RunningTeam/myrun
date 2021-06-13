@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<LinearLayout
-    android:orientation="vertical"
-    tools:context=".LoginActivity"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main">
+    tools:context=".MapActivity"
+
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,23 +34,100 @@
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
 
-    <Button
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/map"
+        android:name="com.naver.maps.map.MapFragment">
+    </fragment>
+
+    <TableLayout
+        android:orientation="horizontal"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="문어 삼촌의 습격"
-        android:layout_marginTop="90dp"
-        android:textStyle="bold"
-        android:layout_gravity="left|center_vertical"
-        android:id="@+id/Taco_btn"
-        android:drawableLeft="@drawable/taco"/>
+        android:stretchColumns="*">
+
+
+        <TableRow android:background="#000000">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="Distance\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="TIme\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#000000"
+                android:text="Kcal\n"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"/>
+
+        </TableRow>
+
+
+        <TableRow android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/km"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="0.000 Km"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/Ntime"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="0 second"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/Kc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:text="0 Kcal"
+                android:gravity="center"/>
+
+        </TableRow>
+
+    </TableLayout>
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="문어 삼촌의 습격"
-        android:layout_marginTop="90dp"
+        android:text="START"
+        android:layout_marginTop="15dp"
         android:textStyle="bold"
-        android:layout_gravity="left|center_vertical"
-        android:drawableLeft="@drawable/ojing"/>
+        android:backgroundTint="#ECCEF5"
+        android:layout_gravity="center"
+        android:id="@+id/btnNormalstart"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="STOP"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:backgroundTint="#ECCEF5"
+        android:layout_gravity="center"
+        android:id="@+id/btnNormalStop"/>
 
 </LinearLayout>
