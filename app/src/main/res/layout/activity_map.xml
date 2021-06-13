@@ -87,15 +87,15 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#000000"
-                android:text="10.25Km"
+                android:text="0.0 Km"
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/Ntime"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#000000"
-                android:text="00:54:16"
+                android:text="0 second"
                 android:gravity="center"/>
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#000000"
-                android:text="451Kcal"
+                android:text="0 Kcal"
                 android:gravity="center"/>
 
         </TableRow>
