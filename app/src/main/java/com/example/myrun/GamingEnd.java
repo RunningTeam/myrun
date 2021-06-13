@@ -119,6 +119,9 @@ public class GamingEnd extends AppCompatActivity {
                 bmp.recycle();
                 Intent in1 = new Intent(this, MainActivity.class);
                 in1.putExtra("image", filename);
+                in1.putExtra("time" , receiveIntent.getStringExtra("time"));
+                in1.putExtra("km" , receiveIntent.getStringExtra("km"));
+                in1.putExtra("kc" , receiveIntent.getStringExtra("kc"));
                 startActivity(in1);
             }catch(Exception e){
                 e.printStackTrace();
