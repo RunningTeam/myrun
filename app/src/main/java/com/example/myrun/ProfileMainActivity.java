@@ -1,11 +1,14 @@
 package com.example.myrun;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +23,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.InputStream;
+
 
 public class ProfileMainActivity extends AppCompatActivity {
 
     private static final int LOGIN_CODE = 111; //값이 어느 액티비티에서 오는지 구별한다.
+    private static final int REQUEST_CODE = 0;
     Toolbar toolbar;
+    ImageView profile_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +64,17 @@ public class ProfileMainActivity extends AppCompatActivity {
 
         setProfile_name(); // 프로필 기본 이름을, 파이어베이스에 입력된 유저닉네임에서 불러오는 함수
 
-//        Intent intent = getIntent();
-//
-//        String profile_name = intent.getStringExtra("profile_name");
-//        String profile_licence = intent.getStringExtra("profile_licence");
-//        String profile_gender = intent.getStringExtra("profile_gender");
-//        String profile_address = intent.getStringExtra("profile_address");
-
+        //이미지 뷰를 클릭시, 내부 저장소의 사진을 프로필로 저장 할 수있게끔 하는 메서드
+        profile_image = findViewById(R.id.profile_image);
+        profile_image.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
     }
 
     private void setProfile_name(){
@@ -72,11 +83,12 @@ public class ProfileMainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 User user = task.getResult().toObject(User.class);
-                profile_name.setText(user.getUserNickName().split("@")[0]);
+                profile_name.setText(user.getUserNickName().split("@")[0]); // 아이디 중, @을 기준, 왼쪽에 있는 아이디를 이름으로 임시 설정
             }
         });
     }
 
+    // 편집 레이아웃에서, 입력된 값들을 프로필에 올려주는 메서드
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -87,7 +99,7 @@ public class ProfileMainActivity extends AppCompatActivity {
         TextView profile_address = (TextView) findViewById(R.id.receiveText4);
 
         switch (requestCode){
-            case LOGIN_CODE:
+            case LOGIN_CODE: // case, 프로필 편집일 때
                 if(resultCode == RESULT_OK) {
                     profile_name.setText(intent.getStringExtra("profile_name"));
                     profile_licence.setText(intent.getStringExtra("profile_licence"));
@@ -98,9 +110,23 @@ public class ProfileMainActivity extends AppCompatActivity {
                     Toast.makeText(this, "fail", Toast.LENGTH_LONG).show();
                 }
                 break;
+            case REQUEST_CODE: // case, 프로필 사진 변경일 때
+                if(resultCode == REQUEST_CODE){
+                        if(resultCode == RESULT_OK) {
+                            try{
+                                InputStream in = getContentResolver().openInputStream(intent.getData());
 
-            default:
-                break;
+                                Bitmap img = BitmapFactory.decodeStream(in);
+                                in.close();
+
+                                profile_image.setImageBitmap(img);
+                            }catch(Exception e)
+                            { }
+                        }
+                        else if(resultCode == RESULT_CANCELED) {
+                            Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
         }
-    }
 }
