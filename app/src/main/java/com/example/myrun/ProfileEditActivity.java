@@ -32,7 +32,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowCustomEnabled(true); // 커스터마이징 하기 위해 필요
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55e6c3"))); // 툴바 배경색
 
-        Button save_profile = findViewById(R.id.save_profile);
+        Button save_profile = findViewById(R.id.save_profile); // 프로필 편집 후, 관련 정보를 넘기는 메소드
         save_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
