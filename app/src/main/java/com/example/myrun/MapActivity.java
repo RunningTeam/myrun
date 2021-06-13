@@ -67,8 +67,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, MapStopActivity.class);
+                Intent intent = new Intent(MapActivity.this, GamingEnd.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -113,7 +114,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         long endTime = System.currentTimeMillis();
                         time.setText(Long.toString((endTime - startTime)/1000) + " second");
                         km.setText(Double.toString(round(totald*100000)/1000.0)+" km");
-                        kc.setText(Integer.toString((int) (totald*60))+ " Kcal");
+                        kc.setText(Double.toString((round(totald*100000)/1000.0)*60.0) + " Kcal");
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(MapActivity.this);
                     }
