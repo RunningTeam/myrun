@@ -125,7 +125,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HistoryRunning1__.class);
                 startActivity(intent);
-                finish();
             }
         });
 
