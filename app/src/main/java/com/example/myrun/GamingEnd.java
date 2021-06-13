@@ -27,12 +27,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.example.myrun.model.Auth;
-import com.example.myrun.model.Firestore;
-import com.example.myrun.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,9 +55,7 @@ public class GamingEnd extends AppCompatActivity {
     private String mCurrentPhotoPath;
 
     Toolbar toolbar;
-
     static String name;
-
     private Bitmap bmp;
 
     @Override
@@ -66,16 +65,13 @@ public class GamingEnd extends AppCompatActivity {
 
 
 
-        Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference productRef = db.collection("user");
+        productRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                User user = task.getResult().toObject(User.class);
-                if(user != null){
-                    name = user.getUserNickName();
-                }else {
-                    // failed.
-                    Log.d("MainActivity.this", "user object is NULL.");
-                }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                name = user.getEmail();
             }
         });
 
