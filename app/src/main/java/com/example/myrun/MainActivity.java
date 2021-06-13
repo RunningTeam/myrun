@@ -1,12 +1,15 @@
 package com.example.myrun;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,17 +24,17 @@ import com.example.myrun.model.Firestore;
 import com.example.myrun.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.io.FileInputStream;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    FloatingActionButton makeNewAppo;
     TextView tv_name;
     private static final String TAG = "MainActivity";
 
@@ -104,10 +107,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                         startActivity(intent_friend);
                         break;
 
-                    case R.id.item_history:
-                        Intent intent_history = new Intent (MainActivity.this, HistoryMainActivity.class);
-                        startActivity(intent_history);
-                        break;
 
                     case R.id.item_logout:
                         FirebaseAuth.getInstance().signOut();
@@ -119,8 +118,30 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 }
                 return true;
             }
-
         });
+        ImageButton image_btn1_click = findViewById(R.id.image_btn1_click);
+        image_btn1_click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HistoryRunning1__.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        image_btn1_click = findViewById(R.id.image_btn1_click);
+
+        Bitmap bmp = null;
+        String filename = getIntent().getStringExtra("image");
+        try{
+            FileInputStream is = this.openFileInput(filename);
+            bmp = BitmapFactory.decodeStream(is);
+            is.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        image_btn1_click.setImageBitmap(bmp);
     }
 
     private void setProfile(){
