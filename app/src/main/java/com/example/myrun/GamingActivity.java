@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,9 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
     Toolbar toolbar;
     PathOverlay path = new PathOverlay();
     ArrayList<LatLng> locationList = new ArrayList<>();
+    SoundPool mPool;
+    int mDdok;
+    AudioManager mAm;
 
     double totald;
 
@@ -58,6 +63,9 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        mPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+        mDdok = mPool.load(this, R.raw.ddok,1);
 
         toolbar = findViewById(R.id.toolbar_map);
         //상단 툴바 설정
@@ -86,7 +94,6 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
         TextView time = findViewById(R.id.Ntime);
         TextView kc = findViewById(R.id.Kc);
 
-
         final long startTime = System.currentTimeMillis();
 
         Button btnstart = findViewById(R.id.btnNormalstart);
@@ -108,6 +115,11 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
                         time.setText(Long.toString((endTime - startTime)/1000) + " second");
                         km.setText(Double.toString(round(totald*100000)/1000.0)+" km");
                         kc.setText(Double.toString(round(totald*6000000)/1000.0) + " Kcal");
+                        Double tempkm = (round(totald*100000)/1000.0) / ((endTime - startTime)/1000);
+                        if (Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)) < tempkm) {
+                            mPool.play(mDdok,1,1,0,2,1);
+                            Toast.makeText(getApplicationContext(),"문어아빠가 다가옵니다!",Toast.LENGTH_SHORT).show();
+                        }
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(GamingActivity.this);
                     }
