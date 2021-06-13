@@ -118,6 +118,6 @@
         android:textStyle="bold"
         android:backgroundTint="#ECCEF5"
         android:layout_gravity="center"
-        android:id="@+id/btnStop"/>
+        android:id="@+id/btnNormalStop"/>
 
 </LinearLayout>

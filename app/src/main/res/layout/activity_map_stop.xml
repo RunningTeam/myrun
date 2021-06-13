@@ -118,7 +118,7 @@
         android:textStyle="bold"
         android:backgroundTint="#ECCEF5"
         android:layout_gravity="center"
-        android:id="@+id/btnRestart"/>
+        android:id="@+id/btnNormalRestart"/>
 
     <Button
         android:layout_height="wrap_content"
@@ -128,6 +128,6 @@
         android:textStyle="bold"
         android:backgroundTint="#ECCEF5"
         android:layout_gravity="center"
-        android:id="@+id/btnComplete"/>
+        android:id="@+id/btnNormalComplete"/>
 
 </LinearLayout>

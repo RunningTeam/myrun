@@ -64,7 +64,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
-        Button btnstop = findViewById(R.id.btnStop);
+        Button btnstop = findViewById(R.id.btnNormalStop);
         btnstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
