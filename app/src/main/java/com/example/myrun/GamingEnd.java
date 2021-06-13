@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +53,16 @@ public class GamingEnd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming_end);
+
+        Intent receiveIntent = getIntent();
+        TextView runResult = findViewById(R.id.runResult);
+        if (receiveIntent != null) {
+            String result = String.format("User: \n\nTime: %s\n\nDistance: %s\n\nKcal: %s",
+                    receiveIntent.getStringExtra("time"),
+                    receiveIntent.getStringExtra("km"),
+                    receiveIntent.getStringExtra("kc"));
+            runResult.setText(result);
+        }
 
         toolbar = findViewById(R.id.toolbar_map);
         //상단 툴바 설정
