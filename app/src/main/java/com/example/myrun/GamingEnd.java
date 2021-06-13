@@ -20,20 +20,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,7 +49,6 @@ public class GamingEnd extends AppCompatActivity {
     private String mCurrentPhotoPath;
 
     Toolbar toolbar;
-    static String name;
     private Bitmap bmp;
 
     @Override
@@ -63,21 +56,12 @@ public class GamingEnd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming_end);
 
-
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference productRef = db.collection("user");
-        productRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                name = user.getEmail();
-            }
-        });
-
         Intent receiveIntent = getIntent();
         TextView runResult = findViewById(R.id.runResult);
         if (receiveIntent != null) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String[] names = user.getEmail().split("@");
+            String name = names[0];
             String result = String.format("User: %s\n\nTime: %s\n\nDistance: %s\n\nKcal: %s", name,
                     receiveIntent.getStringExtra("time"),
                     receiveIntent.getStringExtra("km"),
