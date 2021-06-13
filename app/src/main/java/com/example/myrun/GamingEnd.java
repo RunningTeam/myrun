@@ -57,14 +57,14 @@ public class GamingEnd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaming_end);
 
-
-
         Intent receiveIntent = getIntent();
         TextView runResult = findViewById(R.id.runResult);
         if (receiveIntent != null) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String[] names = user.getEmail().split("@");
             String name = names[0];
+
+            // 뛰었던 기록들을 String 화
             String result = String.format("User: %s\n\nTime: %s\n\nDistance: %s\n\nKcal: %s", name,
                     receiveIntent.getStringExtra("time"),
                     receiveIntent.getStringExtra("km"),
@@ -99,8 +99,8 @@ public class GamingEnd extends AppCompatActivity {
 
         btnCamera.setOnClickListener(v->captureCamera());
 
+        // 저장을 누를시, 비트화 한 사진과 뛴 기록을 intent로 넘김
         btnSave.setOnClickListener(v->{
-
             try{
                 BitmapDrawable drawable = (BitmapDrawable) ivCapture.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
@@ -137,7 +137,8 @@ public class GamingEnd extends AppCompatActivity {
 
     }
 
-    private void captureCamera(){
+    // 카메라 기능을 실행 후, 임시 파일에 저장해 View할 메서드
+   private void captureCamera(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if(takePictureIntent.resolveActivity(getPackageManager())!=null){
@@ -172,15 +173,17 @@ public class GamingEnd extends AppCompatActivity {
         }
     }
 
-    private void saveImg(){
 
+    private void saveImg(){
         try{
+            //저장할 파일 경로
             File storageDir = new File(getFilesDir() + "/capture");
             if(!storageDir.exists())
                 storageDir.mkdirs();
 
             String filename = "캡쳐파일" + ".jpg";
 
+            //기존에 있다면 삭제
             File file = new File(storageDir, filename);
             boolean deleted = file.delete();
             Log.w(TAG, "Delete Dup Check :" + deleted);
@@ -190,7 +193,7 @@ public class GamingEnd extends AppCompatActivity {
                 output = new FileOutputStream(file);
                 BitmapDrawable drawable = (BitmapDrawable)ivCapture.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output); // 해상도에 맞춰, Compress
                 bmp = bitmap;
             }catch(FileNotFoundException e){
                 e.printStackTrace();
@@ -211,6 +214,7 @@ public class GamingEnd extends AppCompatActivity {
         }
     }
 
+    // 저장 경로에 따라 이미 저장된 파일이 있다면 앱 실행시 이미지 파일을 로드해오는 메서드
     private void loadImgArr(){
         try{
             File storageDir = new File(getFilesDir()+"/capture");
@@ -225,6 +229,7 @@ public class GamingEnd extends AppCompatActivity {
         }
     }
 
+    //startActivityForResult로 요청받은 request 내용을 받아오는 메서드
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
         try{
@@ -270,7 +275,7 @@ public class GamingEnd extends AppCompatActivity {
             Log.w(TAG, "onActivityResult Error!", e);
         }
     }
-
+    // 카메라에 맞게 이미지 로테이션
     public static Bitmap rotateImage(Bitmap source, float angle){
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
@@ -278,11 +283,12 @@ public class GamingEnd extends AppCompatActivity {
                 matrix, true);
     }
 
+    // 권한을 체크 해줌
     public void onResume(){
         super.onResume();
         checkPermission();
     }
-
+    // 권한이 없으면 확인 후 권한 요청
     public void checkPermission(){
         int permissionCamera = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
         int permissionRead = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
