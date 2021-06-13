@@ -40,7 +40,7 @@ public class MapStopActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_map_stop);
 
         toolbar = findViewById(R.id.toolbar_map);
         //상단 툴바 설정
@@ -64,7 +64,7 @@ public class MapStopActivity extends AppCompatActivity implements OnMapReadyCall
         // onMapReady에서 NaverMap 객체를 받음
         mapFragment.getMapAsync(this);
 
-        Button btnrestart = findViewById(R.id.btnRestart);
+        Button btnrestart = findViewById(R.id.btnNormalRestart);
         btnrestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class MapStopActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        Button btncomplete = findViewById(R.id.btnComplete);
+        Button btncomplete = findViewById(R.id.btnNormalComplete);
         btncomplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
