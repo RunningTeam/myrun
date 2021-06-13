@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.lang.Math.round;
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -107,10 +109,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     if (locationList.size() > 2) {
                         double lat1 = locationList.get(locationList.size()-2).latitude;
                         double lon1 = locationList.get(locationList.size()-2).longitude;
-                        totald = totald + Math.round(Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)))/100.0;
+                        totald = totald + Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2));
                         long endTime = System.currentTimeMillis();
                         time.setText(Long.toString((endTime - startTime)/1000) + " second");
-                        km.setText(Double.toString(totald)+" km");
+                        km.setText(Double.toString(round(totald*1000)/1000.0)+" km");
                         kc.setText(Integer.toString((int) (totald*60))+ " Kcal");
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(MapActivity.this);
