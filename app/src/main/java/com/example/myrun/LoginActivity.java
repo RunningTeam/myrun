@@ -17,7 +17,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-
     // 전역변수 선언
     // Firebase 유저 정보와 로그 Tag
     private static final String TAG = "LoginActivity";
@@ -98,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent (this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 }
 
