@@ -81,6 +81,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
         mNaverMap.setLocationSource(mLocationSource);
+        mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
         // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
