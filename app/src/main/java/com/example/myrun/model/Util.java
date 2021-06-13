@@ -7,7 +7,6 @@ import java.util.Date;
 public class Util {
     /*
      * Firebase DateTime 정보를 Format에 맞춰 Split
-     * @author Taehyun Park
      * @param dateTime
      * @return 시간 정보 String
      */
@@ -19,7 +18,6 @@ public class Util {
 
     /*
      * date 정보를 Format에 맞춰 Split
-     * @author Taehyun Park
      * @param date
      * @return String[] 배열
      */
@@ -30,9 +28,6 @@ public class Util {
     }
 
     /*
-     * 남은 시간 = 약속 시간 - 현재시간
-     * @author Taehyun Park
-     * @param  약속 시간 infoDateTime
      * @return 시간 초 값 Int
      */
     public static int calculateTime(String infoDateTime){

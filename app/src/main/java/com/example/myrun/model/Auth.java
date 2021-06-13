@@ -9,7 +9,6 @@ public class Auth {
      * FirebaseAuth Instance를 얻어온다
      *
      * @return FirebaseAuth Instance
-     * @author Taehyun Park
      */
     public static FirebaseAuth getFirebaseAuthInstance() {
         return FirebaseAuth.getInstance();

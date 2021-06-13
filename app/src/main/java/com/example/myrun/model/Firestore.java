@@ -14,7 +14,6 @@ public class Firestore {
 
     /*
      * Firestore의 Instance를 반환한다
-     * @author Taehyun Park
      * @return FirebaseFirestore Instance
      */
     public static FirebaseFirestore getFirestoreInstance() {
@@ -23,7 +22,6 @@ public class Firestore {
 
     /*
      * 새로운 유저의 정보를 DB에 추가하도록 요청한다
-     * @author Taehyun Park
      * @param userId Firebase UID
      * @param userEmail 유저 이메일
      * @param userNickName 유저 닉네임
@@ -36,7 +34,6 @@ public class Firestore {
 
     /*
      * 유저 정보를 가져온다
-     * @author Taehyun Park
      * @param userId Firebase UID
      * @return Task<DocumentSnapshot>
      */
@@ -46,7 +43,6 @@ public class Firestore {
 
     /*
      * 약속 info를 불러오는 Query를 생성한다
-     * @author Taehyun Park
      * @param date ,userId
      * @return Query
      */
@@ -56,7 +52,6 @@ public class Firestore {
 
     /*
      * '모든' 약속 info를 불러오는 Query를 생성한다
-     * @author Taehyun Park
      * @param userId
      * @return Query
      */
@@ -66,7 +61,6 @@ public class Firestore {
 
     /*
      * 약속 시간이 임박한 info 4개를 불러오는 Query를 생성한다
-     * @author Taehyun Park
      * @param userId
      * @return Query
      */
