@@ -63,15 +63,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         getSupportActionBar().setDisplayShowCustomEnabled(true); // 커스터마이징 하기 위해 필요
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55e6c3"))); // 툴바 배경색
 
-        Button btnstop = findViewById(R.id.btnNormalStop);
-        btnstop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, GamingEnd.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource =
@@ -135,6 +126,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         };
         Timer timer = new Timer();
         timer.schedule(timerTask, 5000, 1000);
+
+        Button btnstop = findViewById(R.id.btnNormalStop);
+        btnstop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, GamingEnd.class);
+                intent.putExtra("km",km.getText().toString());
+                intent.putExtra("time",time.getText().toString());
+                intent.putExtra("kc",kc.getText().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
