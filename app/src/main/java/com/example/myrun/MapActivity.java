@@ -89,11 +89,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    double lat = mLocationSource.getLastLocation().getLatitude();
-                    double lon = mLocationSource.getLastLocation().getLongitude();
-                    locationList.add(new LatLng(lat,lon));
+                double lat = mLocationSource.getLastLocation().getLatitude();
+                double lon = mLocationSource.getLastLocation().getLongitude();
+                locationList.add(new LatLng(lat,lon));
+                if (locationList.size() > 2) {
                     path.setCoords(locationList);
-                    finalMapFragment.getMapAsync(MapActivity.this);
+                    startToast("1차성공 " + Integer.toString(locationList.size()));
+                } else {
+                    startToast("1차실패 " + Integer.toString(locationList.size()));
+                }
+                finalMapFragment.getMapAsync(MapActivity.this);
             }
         });
     }
@@ -105,13 +110,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
         mNaverMap.setMapType(NaverMap.MapType.Basic);
-        path.setMap(mNaverMap);
+        if (locationList.size() > 2) {
+            path.setColor(Color.GREEN);
+            path.setMap(mNaverMap);
+            startToast("2차 성공 " + Integer.toString(locationList.size()));
+        } else {
+            startToast("2차 실패 " + Integer.toString(locationList.size()));
+        }
         mNaverMap.setLocationSource(mLocationSource);
         mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
         // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -128,5 +140,4 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-
 }
