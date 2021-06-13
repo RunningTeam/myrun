@@ -141,7 +141,7 @@ public class GamingActivity extends AppCompatActivity implements OnMapReadyCallb
             }
         };
         Timer timer = new Timer();
-        timer.schedule(timerTask, 5000, 1000);
+        timer.schedule(timerTask, 5000, 2000);
 
         Button btnstop = findViewById(R.id.btnNormalStop);
         btnstop.setOnClickListener(new View.OnClickListener() {
