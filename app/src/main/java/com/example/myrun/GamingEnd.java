@@ -34,7 +34,7 @@ import java.util.Date;
 
 public class GamingEnd extends AppCompatActivity {
 
-    private static final String TAG = "CameraActivity";
+    private static final String TAG = "GameingEnd";
 
     public static final int REQUEST_TAKE_PHOTO = 10;
     public static final int REQUEST_PERMISSION = 11;
