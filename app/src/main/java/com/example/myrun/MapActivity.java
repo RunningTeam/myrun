@@ -107,7 +107,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     if (locationList.size() > 2) {
                         double lat1 = locationList.get(locationList.size()-2).latitude;
                         double lon1 = locationList.get(locationList.size()-2).longitude;
-                        totald = totald + Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2));
+                        totald = totald + Math.round(Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2)))/100.0;
                         long endTime = System.currentTimeMillis();
                         time.setText(Long.toString((endTime - startTime)/1000) + " second");
                         km.setText(Double.toString(totald)+" km");
