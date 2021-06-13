@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="프로필 사진 선택"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="15dp"/>
 
                 <ImageView
                     android:id="@+id/profile_image"

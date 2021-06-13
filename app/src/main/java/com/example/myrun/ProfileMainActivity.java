@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +30,7 @@ import java.io.InputStream;
 public class ProfileMainActivity extends AppCompatActivity {
 
     private static final int LOGIN_CODE = 111; //값이 어느 액티비티에서 오는지 구별한다.
-    private static final int REQUEST_CODE = 0;
+    private final int GET_GALLERY_IMAGE = 200;
     Toolbar toolbar;
     ImageView profile_image;
 
@@ -69,10 +70,9 @@ public class ProfileMainActivity extends AppCompatActivity {
         profile_image.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_CODE);
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
     }
@@ -110,16 +110,12 @@ public class ProfileMainActivity extends AppCompatActivity {
                     Toast.makeText(this, "fail", Toast.LENGTH_LONG).show();
                 }
                 break;
-            case REQUEST_CODE: // case, 프로필 사진 변경일 때
-                if(resultCode == REQUEST_CODE){
+            case GET_GALLERY_IMAGE: // case, 프로필 사진 변경일 때
+                if(resultCode == RESULT_OK){
                         if(resultCode == RESULT_OK) {
                             try{
-                                InputStream in = getContentResolver().openInputStream(intent.getData());
-
-                                Bitmap img = BitmapFactory.decodeStream(in);
-                                in.close();
-
-                                profile_image.setImageBitmap(img);
+                                Uri selectedImageUri = intent.getData();
+                                profile_image.setImageURI(selectedImageUri);
                             }catch(Exception e)
                             { }
                         }
