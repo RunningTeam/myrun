@@ -5,8 +5,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
 
@@ -40,32 +38,4 @@ public class Firestore {
     public static Task<DocumentSnapshot> getUserData(String userId) {
         return getFirestoreInstance().collection("user").document(userId).get();
     }
-
-    /*
-     * 약속 info를 불러오는 Query를 생성한다
-     * @param date ,userId
-     * @return Query
-     */
-    public static Query getInfoDate(String date, String userId) {
-        return getFirestoreInstance().collection("Info").whereEqualTo("date",date).whereEqualTo("writer",userId).limit(10);
-    }
-
-    /*
-     * '모든' 약속 info를 불러오는 Query를 생성한다
-     * @param userId
-     * @return Query
-     */
-    public static Query getAllInfo(String userId){
-        return getFirestoreInstance().collection("Info").whereEqualTo("writer",userId).orderBy("dateTime", Query.Direction.ASCENDING).limit(10);
-    }
-
-    /*
-     * 약속 시간이 임박한 info 4개를 불러오는 Query를 생성한다
-     * @param userId
-     * @return Query
-     */
-    public static Task<QuerySnapshot> getInfoFour(String userId) {
-        return getFirestoreInstance().collection("Info").whereEqualTo("writer",userId).orderBy("dateTime", Query.Direction.DESCENDING).limit(4).get();
-    }
-
 }
