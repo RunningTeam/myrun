@@ -119,7 +119,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 return true;
             }
         });
+        // 메인의 공란 이미지 버튼들에, 일반 런닝 혹은 게임 모드에서 찍은 사진들을 stack
         ImageButton image_btn1_click = findViewById(R.id.image_btn1_click);
+        ImageButton image_btn2_click = findViewById(R.id.image_btn2_click);
+
         image_btn1_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +132,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         });
 
         image_btn1_click = findViewById(R.id.image_btn1_click);
+        image_btn2_click = findViewById(R.id.image_btn2_click);
 
+        // 일반 런닝모드와 게임 모드에서 찍은 사진을 비트맵화
         Bitmap bmp = null;
         String filename = getIntent().getStringExtra("image");
         try{
@@ -140,9 +145,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             e.printStackTrace();
         }
 
-        image_btn1_click.setImageBitmap(bmp);
-
+        // 일반 런닝모드와 게임 모드에서 찍은 사진을 bmp로 저장 후 덮어쓰기
         Intent receiveIntent = getIntent();
+        int i = receiveIntent.getIntExtra("key",0);
+        if (i == 0){
+            image_btn1_click.setImageBitmap(bmp);
+        }
+        else if(i == 1){
+            image_btn2_click.setImageBitmap(bmp);
+        }
+
+        // 일반 런닝모드와 게임 모드에서 달린 거리를 intent로 받아, 기록란에 나타냄
         TextView ttime = findViewById(R.id.ttime);
         TextView tkm = findViewById(R.id.tkm);
         TextView tkc = findViewById(R.id.tkc);
@@ -153,6 +166,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
     }
 
+    //툴바의 환영문구 세팅. 파이어베이스의 로그인한 이메일에서 split해 나타냄
     private void setProfile(){
         Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
