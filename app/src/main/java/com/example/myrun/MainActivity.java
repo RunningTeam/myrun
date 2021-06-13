@@ -141,6 +141,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
 
         image_btn1_click.setImageBitmap(bmp);
+
+        Intent receiveIntent = getIntent();
+        TextView ttime = findViewById(R.id.ttime);
+        TextView tkm = findViewById(R.id.tkm);
+        TextView tkc = findViewById(R.id.tkc);
+        if (receiveIntent.getStringExtra("time") != null) {
+            ttime.setText(receiveIntent.getStringExtra("time"));
+            tkm.setText(receiveIntent.getStringExtra("km"));
+            tkc.setText(receiveIntent.getStringExtra("kc"));
+        }
     }
 
     private void setProfile(){
