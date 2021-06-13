@@ -1,5 +1,6 @@
 package com.example.myrun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,6 +47,8 @@ public class GamingEnd extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    private Bitmap bmp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,7 @@ public class GamingEnd extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55e6c3"))); // 툴바 배경색
 
         checkPermission();
+        //loadImgArr(); 보류, 필수기능 X
 
         ivCapture = findViewById(R.id.ivCapture);
         btnCamera = findViewById(R.id.btnCapture);
@@ -100,6 +105,20 @@ public class GamingEnd extends AppCompatActivity {
             }catch(Exception e){
                 Log.w(TAG, "SAVE ERROR!", e);
             }
+
+            try{
+                String filename = "bitmap.png";
+                FileOutputStream stream = this.openFileOutput(filename, Context.MODE_PRIVATE);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                stream.close();
+                bmp.recycle();
+                Intent in1 = new Intent(this, HistoryMainActivity.class);
+                in1.putExtra("image", filename);
+                startActivity(in1);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
         });
 
     }
@@ -158,6 +177,7 @@ public class GamingEnd extends AppCompatActivity {
                 BitmapDrawable drawable = (BitmapDrawable)ivCapture.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output);
+                bmp = bitmap;
             }catch(FileNotFoundException e){
                 e.printStackTrace();
             }finally{
@@ -196,6 +216,7 @@ public class GamingEnd extends AppCompatActivity {
         try{
             switch(requestCode){
                 case REQUEST_TAKE_PHOTO:{
+
                     if(resultCode == RESULT_OK){
                         File file =  new File(mCurrentPhotoPath);
                         Bitmap bitmap = MediaStore.Images.Media
