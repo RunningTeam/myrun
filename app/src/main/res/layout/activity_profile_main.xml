@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/text"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/Theme.myrun"
-            android:backgroundTint="@color/text"
             app:popupTheme="@style/Theme.myrun">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:text="MyRun"
-                android:textSize="30dp"
-                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
+                android:textSize="30dp"
                 android:textStyle="bold">
             </TextView>
         </androidx.appcompat.widget.Toolbar>
@@ -34,29 +35,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
-
-        <Button
-            android:id="@+id/back_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="   프로필"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_weight="3"
         android:orientation="horizontal">
 
@@ -70,7 +66,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:orientation="vertical">
-
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -78,7 +73,6 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="40dp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -87,61 +81,137 @@
                 android:layout_weight="3"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/receiveText1"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="15dp"
-                    android:text="이름 : 서동익"
-                    android:textSize="15dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_margin="10dp"/>
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/receiveText2"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="15dp"
-                    android:text="등록번호 : 201835848"
-                    android:textSize="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_height="25dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="이름 : "
+                        android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/receiveText3"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="15dp"
-                    android:text="성별 : 남자"
-                    android:textSize="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/receiveText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:textSize="15dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/receiveText4"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="15dp"
-                    android:text="서울시 강동구 어디어디 "
-                    android:textSize="15dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_height="25dp"/>
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="등록번호 : "
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/receiveText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:textFontWeight="1"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="성별 : "
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/receiveText3"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:textFontWeight="1"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="주소 : "
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/receiveText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:textFontWeight="1"
+                        android:textSize="15dp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/profile_edit_btn"
                     android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
                     android:text="프로필 편집"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:backgroundTint="@color/text"/>
 
             </LinearLayout>
 
@@ -149,65 +219,66 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="15dp"
             android:text="최근 기록 : "
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="50dp"/>
+            android:textSize="20dp" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="15dp"
             android:text="최근 기록 : "
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="50dp"/>
+            android:textSize="20dp" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="15dp"
             android:text="최근 기록 : "
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="50dp"/>
+            android:textSize="20dp" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="15dp"
             android:text="최근 기록 : "
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="50dp"/>
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/friends_add_btn"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingLeft="15dp"
             android:text="친구 추가"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_margin="10dp"
-            android:layout_height="50dp"/>
+            android:backgroundTint="@color/text"
+            android:textSize="20dp" />
     </LinearLayout>
 </LinearLayout>
