@@ -112,7 +112,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         totald = totald + Math.sqrt(Math.pow(lon-lon1,2)+Math.pow(lat-lat1,2));
                         long endTime = System.currentTimeMillis();
                         time.setText(Long.toString((endTime - startTime)/1000) + " second");
-                        km.setText(Double.toString(round(totald*1000)/1000.0)+" km");
+                        km.setText(Double.toString(round(totald*100000)/1000.0)+" km");
                         kc.setText(Integer.toString((int) (totald*60))+ " Kcal");
                         path.setCoords(locationList);
                         finalMapFragment.getMapAsync(MapActivity.this);
