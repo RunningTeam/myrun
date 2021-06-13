@@ -123,6 +123,7 @@ public class GamingEnd extends AppCompatActivity {
                 in1.putExtra("km" , receiveIntent.getStringExtra("km"));
                 in1.putExtra("kc" , receiveIntent.getStringExtra("kc"));
                 startActivity(in1);
+                finish();
             }catch(Exception e){
                 e.printStackTrace();
             }
