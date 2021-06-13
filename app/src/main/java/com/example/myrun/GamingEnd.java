@@ -84,7 +84,6 @@ public class GamingEnd extends AppCompatActivity {
 
 
         Button btnGotomain = findViewById(R.id.btnGotomain);
-
         btnGotomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
